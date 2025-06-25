@@ -24,14 +24,9 @@ def get_winning_moves(player):
     w = [(0, 1, 2), (3, 4, 5), (6, 7, 8),
          (0, 3, 6), (1, 4, 7), (2, 5, 8),
          (0, 4, 8), (2, 4, 6)]
-    winning_moves = []
-    for a, b, c in w:
-        line = [board[a], board[b], board[c]]
-        if line.count(player) == 2 and any(board[i] not in ['X', 'O'] for i in (a, b, c)):
-            for i in (a, b, c):
-                if board[i] not in ['X', 'O']:
-                    winning_moves.append(i)
-    return winning_moves
+    return [i for a, b, c in w
+            if [board[a], board[b], board[c]].count(player) == 2
+            for i in (a, b, c) if board[i] not in ['X', 'O']]
 
 
 turn = "X"  # You are X, CPU is O
